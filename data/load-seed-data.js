@@ -1,6 +1,7 @@
 const client = require('../lib/client');
 // import our seed data:
-const animals = require('./animals.js');
+const trivia = require('./trivia.js');
+const scores = require('./scores.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
 
@@ -21,16 +22,27 @@ async function run() {
         [user.email, user.hash]);
       })
     );
-      
+    
     const user = users[0].rows[0];
 
     await Promise.all(
-      animals.map(animal => {
+      trivia.map(t => {
         return client.query(`
-                    INSERT INTO animals (name, cool_factor, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO trivia (category, difficulty, question, correct_answer, incorrect_answers, owner_id)
+                    VALUES ($1, $2, $3, $4, $5, $6);
                 `,
-        [animal.name, animal.cool_factor, user.id]);
+        [t.category, t.difficulty, t.question, t.correct_answer, t.incorrect_answers, user.id]);
+      })
+    );
+
+    await Promise.all(
+      scores.map(score => {
+        return client.query(`
+                        INSERT INTO scores (total_score, owner_id)
+                        VALUES ($1, $2)
+                        RETURNING *;
+                    `,
+        [score.total_score, user.id]);
       })
     );
     

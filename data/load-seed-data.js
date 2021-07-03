@@ -1,6 +1,6 @@
 const client = require('../lib/client');
 // import our seed data:
-const trivia = require('./trivia.js');
+const scores = require('./scores.js'); 
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
 
@@ -25,12 +25,12 @@ async function run() {
     const user = users[0].rows[0];
 
     await Promise.all(
-      trivia.map(t => {
+      scores.map(score => {
         return client.query(`
-                    INSERT INTO trivia (category, difficulty, question, correct_answer, incorrect_answers, owner_id)
-                    VALUES ($1, $2, $3, $4, $5, $6);
+                    INSERT INTO scores (total_scores, nature_scores, owner_id)
+                    VALUES ($1, $2, $3);
                 `,
-        [t.category, t.difficulty, t.question, t.correct_answer, t.incorrect_answers, user.id]);
+        [score.total_scores, score.nature_scores, user.id]);
       })
     );
     

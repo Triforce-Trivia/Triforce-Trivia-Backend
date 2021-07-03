@@ -1,7 +1,8 @@
 module.exports =  [
   {
-    total_score: 0,
+    id: 1, 
+    total_scores: 0,
+    nature_scores: 0, 
   },
- 
 ];
 

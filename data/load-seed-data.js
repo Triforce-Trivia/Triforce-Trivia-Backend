@@ -14,9 +14,20 @@ async function run() {
     const users = await Promise.all(
       usersData.map(user => {
         return client.query(`
-                      INSERT INTO users (first_name, last_name, email, hash)
-                      VALUES ($1, $2, $3, $4 )
-                      RETURNING *;
+                      INSERT INTO users (
+                        first_name, 
+                        last_name, 
+                        email, 
+                        hash
+                      )
+                      VALUES (
+                        $1, 
+                        $2, 
+                        $3, 
+                        $4
+                      )
+                      RETURNING  
+                        *;
                   `,
         [user.first_name, user.last_name, user.email, user.hash]);
       })

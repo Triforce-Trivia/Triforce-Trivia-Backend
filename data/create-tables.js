@@ -14,8 +14,6 @@ async function run() {
     await client.query(`
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
-                    first_name VARCHAR(256) NOT NULL,
-                    last_name VARCHAR(256) NOT NULL,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );
@@ -25,7 +23,6 @@ async function run() {
                     nature_scores INTEGER NOT NULL,
                     owner_id INTEGER NOT NULL REFERENCES users(id)
                 );
-              
         `);
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());

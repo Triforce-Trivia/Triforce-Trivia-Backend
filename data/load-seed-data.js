@@ -15,21 +15,17 @@ async function run() {
       usersData.map(user => {
         return client.query(`
                       INSERT INTO users (
-                        first_name, 
-                        last_name, 
                         email, 
                         hash
                       )
                       VALUES (
                         $1, 
-                        $2, 
-                        $3, 
-                        $4
+                        $2
                       )
                       RETURNING  
                         *;
                   `,
-        [user.first_name, user.last_name, user.email, user.hash]);
+        [user.email, user.hash]);
       })
     );
     
@@ -38,8 +34,10 @@ async function run() {
     await Promise.all(
       scores.map(score => {
         return client.query(`
-                    INSERT INTO scores (total_scores, nature_scores, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO 
+                      scores (total_scores, nature_scores, owner_Id)
+                    VALUES 
+                      ($1, $2, $3);
                 `,
         [score.total_scores, score.nature_scores, user.id]);
       })

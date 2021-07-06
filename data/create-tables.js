@@ -28,7 +28,6 @@ async function run() {
                     owner_id INTEGER NOT NULL REFERENCES users(id), 
                     leaderboard_id INTEGER NOT NULL REFERENCES leaderboard(id)
                 );
-
         `);
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());

@@ -18,14 +18,18 @@ async function run() {
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );
+                CREATE TABLE leaderboard (
+                  id SERIAL PRIMARY KEY, 
+                  high_scores INTEGER NOT NULL
+                );
                 CREATE TABLE scores (
                     id SERIAL PRIMARY KEY,
                     display_name VARCHAR(256) NOT NULL, 
                     total_scores INTEGER NOT NULL, 
                     nature_scores INTEGER NOT NULL,
-                    owner_id INTEGER NOT NULL REFERENCES users(id)
+                    owner_id INTEGER NOT NULL REFERENCES users(id), 
+                    leaderboard_id INTEGER NOT NULL REFERENCES leaderboard(id)
                 );
-              
         `);
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());

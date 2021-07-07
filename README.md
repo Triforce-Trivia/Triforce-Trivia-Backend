@@ -19,7 +19,7 @@
 const authRoutes = createAuthRoutes({
     selectUser(email) {
         return client.query(`
-            SELECT id, email, hash
+            SELECT id, first_name, last_name, email, hash
             FROM users
             WHERE email = $1;
         `,
@@ -29,11 +29,11 @@ const authRoutes = createAuthRoutes({
     insertUser(user, hash) {
         console.log(user);
         return client.query(`
-            INSERT into users (email, hash)
-            VALUES ($1, $2)
-            RETURNING id, email;
+            INSERT into users (first_name, last_name, email, hash)
+            VALUES ($1, $2, $3, $4)
+            RETURNING id, first_name, last_name, email;
         `,
-        [user.email, hash]
+        [first_name, last_name, user.email, hash]
         ).then(result => result.rows[0]);
     }
 });

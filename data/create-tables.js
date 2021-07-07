@@ -14,6 +14,7 @@ async function run() {
     await client.query(`
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
+                    display_name VARCHAR(256)NOT NULL,
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );
@@ -22,7 +23,8 @@ async function run() {
                   high_scores INTEGER NOT NULL
                 );
                 CREATE TABLE scores (
-                    id SERIAL PRIMARY KEY, 
+                    id SERIAL PRIMARY KEY,
+                    display_name VARCHAR(256) NOT NULL, 
                     total_scores INTEGER NOT NULL, 
                     nature_scores INTEGER NOT NULL,
                     owner_id INTEGER NOT NULL REFERENCES users(id), 

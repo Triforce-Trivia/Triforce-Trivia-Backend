@@ -43,19 +43,17 @@ async function run() {
       })
     );
     
-    const leaderboard = leaderboards[0].rows[0]; 
+    // const leaderboard = leaderboards[0].rows[0]; 
 
-    await Promise.all(
-      scores.map(score => {
-        return client.query(`
-
-                    INSERT INTO scores (display_name, total_scores, nature_scores, owner_id)
-                    VALUES ($1, $2, $3, $4);
-                `,
-        [score.display_name, score.total_scores, score.nature_scores, user.id]);
-
-      })
-    );
+    // await Promise.all(
+    //   scores.map(score => {
+    //     return client.query(`
+    //                 INSERT INTO scores (display_name, total_scores, nature_scores, owner_id)
+    //                 VALUES ($1, $2, $3, $4);
+    //             `,
+    //     [score.display_name, score.total_scores, score.nature_scores, user.id]);
+    //   })
+    // );
 
   
     console.log('seed data load complete', getEmoji(), getEmoji(), getEmoji());

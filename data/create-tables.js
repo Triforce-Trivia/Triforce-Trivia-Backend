@@ -26,9 +26,9 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     display_name VARCHAR(256) NOT NULL, 
                     total_scores INTEGER NOT NULL, 
-                    nature_scores INTEGER NOT NULL,
+                    nature_scores INTEGER,
                     owner_id INTEGER NOT NULL REFERENCES users(id), 
-                    leaderboard_id INTEGER NOT NULL REFERENCES leaderboard(id)
+                    leaderboard_id INTEGER REFERENCES leaderboard(id)
                 );
         `);
 

@@ -1,3 +1,4 @@
+// would have liked to see some tests in here
 require('dotenv').config();
 
 const { execSync } = require('child_process');
